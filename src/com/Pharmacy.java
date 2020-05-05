@@ -17,7 +17,9 @@ public class Pharmacy {
 	}
 
 	public String insertPharmacy(String phName, String phAddr, String phOwner,String contact,String regDate,String email) {
+		
 		String output = "";
+		
 		try {
 			Connection con = connect();
 			if (con == null) {
@@ -39,9 +41,14 @@ public class Pharmacy {
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
-			output = "Inserted successfully";
+			
+			String newPharmacy = readPharmacy();
+			 output = "{\"status\":\"success\", \"data\": \"" +
+			 newPharmacy + "\"}"; 
+			 
+			 
 		} catch (Exception e) {
-			output = "Error while inserting the pharmacy.";
+			output = "{\"status\":\"error\", \"data\":\"Error while inserting the Pharamacy.\"}"; 
 			System.err.println(e.getMessage());
 		}
 		return output;
@@ -49,14 +56,17 @@ public class Pharmacy {
 	
 
 	public String readPharmacy() {
+		
 		String output = "";
+		
 		try {
 			Connection con = connect();
 			if (con == null) {
 				return "Error while connecting to the database for reading.";
 			}
+			
 			// Prepare the html table to be displayed
-			output = "<table border=\"1\"><tr><th>Name</th><th>Address</th><th>Owner Name</th><th>Contact</th><th>Registered Date</th><th>Email</th><th>Update</th><th>Remove</th></tr>";
+			output = "<table border='1'><tr><th>Name</th><th>Address</th><th>Owner Name</th><th>Contact</th><th>Registered Date</th><th>Email</th><th>Update</th><th>Remove</th></tr>";
 			String query = "select * from pharmacies";
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
@@ -72,7 +82,7 @@ public class Pharmacy {
 				String email = rs.getString("email");
 				
 				// Add into the html table
-				output += "<tr><td><input id=\"hidRegIdUpdate\" name=\"hidRegIdUpdate\"type=\"hidden\" value=\"" + RegId + "\">"
+				output += "<tr><td><input id='hidRegIdUpdate' name='hidRegIdUpdate' type='hidden' value='" + RegId + "'>"
 						 + phName + "</td>"; 
 				output += "<td>" + phAddr + "</td>";
 				output += "<td>" + phOwner + "</td>";
@@ -81,12 +91,16 @@ public class Pharmacy {
 				output += "<td>" + email + "</td>";
 				
 				// buttons
-				output += "<td><input name=\"btnUpdate\" type=\"button\" value=\"Update\" class=\" btnUpdate btn btn-secondary\"></td> "
-						+ "<td><form method=\"post\" action=\"pharmacy.jsp\"> <input name=\"btnRemove\" type=\"submit\" value=\"Remove\" class=\"btn btn-danger\"> <input name=\"hidRegIdDelete\" type=\"hidden\" value=\"" + RegId + "\">" + "</form></td></tr>";
+				output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td>"
+						  +"<td><input name='btnRemove' type='button' value='Remove' class='btn btn-danger'> data-RegId='"+RegId+"' >" + "</td></tr>";
+				
+				//<input name=\"hidRegIdDelete\" type=\"hidden\" value=\"" + RegId + "\">" + "</form></td></tr>";
 			}
 			con.close();
+			
 			// Complete the html table
 			output += "</table>";
+			
 		} catch (Exception e) {
 			output = "Error while reading the number of pharmacies.";
 			System.err.println(e.getMessage());
@@ -114,12 +128,17 @@ public class Pharmacy {
 			preparedStmt.setString(6, email);
 			
 			preparedStmt.setInt(6, Integer.parseInt(Id));
+			
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
-			output = "Updated successfully";
+			
+			String newPharmacy = readPharmacy();
+			 output = "{\"status\":\"success\", \"data\": \"" +
+			 newPharmacy + "\"}"; 
+
 		} catch (Exception e) {
-			output = "Error while updating the pharmacy.";
+			output = "{\"status\":\"error\", \"data\":\"Error while updating the pharmacy.\"}"; 
 			System.err.println(e.getMessage());
 		}
 		return output;
@@ -127,22 +146,30 @@ public class Pharmacy {
 
 	public String deletePharmacy(String RegId) {
 		String output = "";
+		
 		try {
 			Connection con = connect();
 			if (con == null) {
 				return "Error while connecting to the database for deleting.";
 			}
+			
 			// create a prepared statement
 			String query = "delete from pharmacies where RegId=?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
+			
 			// binding values
 			preparedStmt.setInt(1, Integer.parseInt(RegId));
+			
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
-			output = "Deleted successfully";
+			
+			String newPharmacy = readPharmacy();
+			 output = "{\"status\":\"success\", \"data\": \"" +
+			 newPharmacy + "\"}"; 
+			 
 		} catch (Exception e) {
-			output = "Error while deleting the pharmacy.";
+			output = "{\"status\":\"error\", \"data\":\"Error while deleting the pharmacy.\"}"; 
 			System.err.println(e.getMessage());
 		}
 		return output;

@@ -54,10 +54,13 @@
 				<div id="alertError" class="alert alert-danger"></div>
 				
 				<br>
+				<div id="divItemGrid">
 				<%  
 					Pharmacy phrObj1 = new Pharmacy();
 					out.print(phrObj1.readPharmacy());
 				%>
+				</div>
+				
 			</div>
 		</div>	
 	</div>

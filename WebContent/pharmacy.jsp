@@ -2,6 +2,30 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" %>
 
+<%
+	
+	//Save---------------------------------
+	if (request.getParameter("phName") != null) {
+		Pharmacy phObj = new Pharmacy();
+		String stsMsg = "";
+		//Insert--------------------------
+		if (request.getParameter("hidRegIdSave") == "") {
+			stsMsg = phObj.insertPharmacy(request.getParameter("phName"), request.getParameter("phAddr"),
+					request.getParameter("phOwner"), request.getParameter("contact"),request.getParameter("regDate"),request.getParameter("email"));
+		} else//Update----------------------
+		{
+			stsMsg = phObj.updatePharmacy(request.getParameter("RegId"),request.getParameter("phName"), request.getParameter("phAddr"),
+					request.getParameter("phOwner"), request.getParameter("contact"),request.getParameter("regDate"),request.getParameter("email"));
+		}
+		session.setAttribute("statusMsg", stsMsg);
+	}
+	//Delete-----------------------------
+	if (request.getParameter("hidRegIdDelete") != null) {
+		Pharmacy phObj = new Pharmacy();
+		String stsMsg = phObj.deletePharmacy(request.getParameter("RegId"));
+	}
+%> 
+
 
 <!DOCTYPE html>
 <html>
@@ -54,12 +78,12 @@
 				<div id="alertError" class="alert alert-danger"></div>
 				
 				<br>
-				<div id="divItemGrid">
+				
 				<%  
 					Pharmacy phrObj1 = new Pharmacy();
 					out.print(phrObj1.readPharmacy());
 				%>
-				</div>
+			
 				
 			</div>
 		</div>	

@@ -25,14 +25,13 @@ $(document).on("click", "#btnSave", function(event) {
 
 // UPDATE==========================================
 $(document).on("click",".btnUpdate",function(event) {
-			$("#hidRegIdSave").val(
-			$(this).closest("tr").find('#hidRegIdUpdate').val());
-			$("#phName").val($(this).closest("tr").find('td:eq(2)').text());
-			$("#phAddr").val($(this).closest("tr").find('td:eq(3)').text());
-			$("#phOwner").val($(this).closest("tr").find('td:eq(4)').text());
-			$("#contact").val($(this).closest("tr").find('td:eq(5)').text());
-			$("#regDate").val($(this).closest("tr").find('td:eq(6)').text());
-			$("#email").val($(this).closest("tr").find('td:eq(7)').text());
+			$("#hidRegIdSave").val($(this).closest("tr").find('#hidRegIdUpdate').val());
+			$("#phName").val($(this).closest("tr").find('td:eq(0)').text());
+			$("#phAddr").val($(this).closest("tr").find('td:eq(1)').text());
+			$("#phOwner").val($(this).closest("tr").find('td:eq(2)').text());
+			$("#contact").val($(this).closest("tr").find('td:eq(3)').text());
+			$("#regDate").val($(this).closest("tr").find('td:eq(4)').text());
+			$("#email").val($(this).closest("tr").find('td:eq(5)').text());
 		});
 // CLIENTMODEL=========================================================================
 function validateItemForm() {

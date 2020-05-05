@@ -1,5 +1,8 @@
+<%@ page import="com.Pharmacy"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +11,6 @@
 <link rel="stylesheet" href="Views/bootstrap.min.css">
 <script src="Components/jquery-3.2.1.min.js"></script>
 <script src="Components/pharmacy.js"></script>
-
 </head>
 <body>
 	<div class="container">
@@ -16,6 +18,7 @@
 			<div class="col-8">
 
 				<h1>Pharmacy details</h1>
+				
 
 				<form id="formPharmacy" name="formPharmacy" method="post" action="pharmacy.jsp">
 					 Pharmacy Name: 
@@ -31,16 +34,16 @@
 					 <input id="contact" name="contact" type="text"
 						class="form-control form-control-sm">
 					 <br> Registered Date:
-					 <input id="regDate" name="regDate" type="date"
+					 <input id="regDate" name="regDate" type="text"
 						class="form-control form-control-sm">
 					  <br> Email:
 					 <input id="email" name="email" type="text"
 						class="form-control form-control-sm">
 					 <br> 
-					 <input id="btnSave" name="btnSave" type="button" value="Save"
-						class="btn btn-primary">
-						
-					 <input type="hidden" id="hidItemIDSave" name="hidItemIDSave" value="">
+					 <input id="btnSave" name="btnSave" type="button" value="Save" class="btn btn-primary">
+					 <input type="hidden" id="hidRegIdSave" name="hidRegIdIDSave" value="">
+					 
+					 
 				</form>
 				
 				<div id="alertSuccess" class="alert alert-success">
@@ -48,6 +51,13 @@
 					out.print(session.getAttribute("statusMsg"));
 					%>
 				</div>
+				<div id="alertError" class="alert alert-danger"></div>
+				
+				<br>
+				<%  
+					Pharmacy phrObj1 = new Pharmacy();
+					out.print(phrObj1.readPharmacy());
+				%>
 			</div>
 		</div>	
 	</div>

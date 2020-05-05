@@ -60,6 +60,7 @@ public class Pharmacy {
 			String query = "select * from pharmacies";
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
+			
 			// iterate through the rows in the result set
 			while (rs.next()) {
 				String RegId = Integer.toString(rs.getInt("RegId"));
@@ -69,18 +70,19 @@ public class Pharmacy {
 				String contact = Integer.toString(rs.getInt("contact"));
 				String regDate = rs.getString("regDate");
 				String email = rs.getString("email");
+				
 				// Add into the html table
-				output += "<tr><td>" + phName + "</td>";
+				output += "<tr><td><input id=\"hidRegIdUpdate\" name=\"hidRegIdUpdate\"type=\"hidden\" value=\"" + RegId + "\">"
+						 + phName + "</td>"; 
 				output += "<td>" + phAddr + "</td>";
 				output += "<td>" + phOwner + "</td>";
 				output += "<td>" + contact + "</td>";
 				output += "<td>" + regDate + "</td>";
 				output += "<td>" + email + "</td>";
+				
 				// buttons
-				output += "<td><input name=\"btnUpdate\" type=\"button\"value=\"Update\" class=\"btn btn-secondary\"></td>"
-						+ "<td><form method=\"post\" action=\"pharmacy.jsp\">"
-						+ "<input name=\"btnRemove\" type=\"submit\" value=\"Remove\"class=\"btn btn-danger\">"
-						+ "<input name=\"RegId\" type=\"hidden\" value=\"" + RegId + "\">" + "</form></td></tr>";
+				output += "<td><input name=\"btnUpdate\" type=\"button\" value=\"Update\" class=\" btnUpdate btn btn-secondary\"></td> "
+						+ "<td><form method=\"post\" action=\"pharmacy.jsp\"> <input name=\"btnRemove\" type=\"submit\" value=\"Remove\" class=\"btn btn-danger\"> <input name=\"hidRegIdDelete\" type=\"hidden\" value=\"" + RegId + "\">" + "</form></td></tr>";
 			}
 			con.close();
 			// Complete the html table

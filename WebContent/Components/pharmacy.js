@@ -72,7 +72,9 @@ function onPharmacySaveCmplete(response, status) {
 // UPDATE==========================================
 $(document).on("click", ".btnUpdate", function(event)
 		{
-			$("#hidRegIdSave").val($(this).closest("tr").find('#hidRegIdUpdate').val());
+	$("#hidRegIdSave").val($(this).closest("tr").find('#hidRegIdUpdate').val());
+	
+		
 			$("#phName").val($(this).closest("tr").find('td:eq(0)').text());
 			$("#phAddr").val($(this).closest("tr").find('td:eq(1)').text());
 			$("#phOwner").val($(this).closest("tr").find('td:eq(2)').text());

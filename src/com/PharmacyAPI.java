@@ -74,6 +74,7 @@ public class PharmacyAPI extends HttpServlet {
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		{
 			 Map paras = getParasMap(request);
+			 
 			 String output = phrObj.updatePharmacy(paras.get("hidRegIdSave").toString(),
 			 paras.get("phName").toString(),
 			 paras.get("phAddr").toString(),

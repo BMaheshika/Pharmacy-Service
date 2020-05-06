@@ -11,7 +11,7 @@
 <script src="Components/pharmacy.js"></script> -->
 
 <link rel= "stylesheet" href="Views/bootstrap.min.css">
-<script type="text/javascript" src="Components/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="Components/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="Components/pharmacy.js"></script>
 
 </head>

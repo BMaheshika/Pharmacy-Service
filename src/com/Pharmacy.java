@@ -91,8 +91,8 @@ public class Pharmacy {
 				
 				// buttons
 				//put btn ids
-				output += "<td><input id='btnUpdate' name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td>"
-				+"<td><input id='btnRemove' name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' data-itemid='"+RegId+"'>" + "</td></tr>";
+				output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td>"
+				+"<td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' data-itemid='"+RegId+"'>" + "</td></tr>";
 						
 				//<input name=\"hidRegIdDelete\" type=\"hidden\" value=\"" + RegId + "\">" + "</form></td></tr>";
 			}
@@ -142,34 +142,41 @@ public class Pharmacy {
 		}
 		return output;
 	}
-
+	
 	public String deletePharmacy(String RegId) {
 		String output = "";
-		
+
 		try {
+
 			Connection con = connect();
+
 			if (con == null) {
 				return "Error while connecting to the database for deleting.";
 			}
-			
+
 			// create a prepared statement
-			String query = "delete from pharmacies where RegId=?";
+			String query = "delete from pharmacies  where RegId=?";
+
 			PreparedStatement preparedStmt = con.prepareStatement(query);
-			
+
 			// binding values
 			preparedStmt.setInt(1, Integer.parseInt(RegId));
-			
+
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
-			
-			String newPharmacy = readPharmacy();
-			 output = "{\"status\":\"success\", \"data\": \"" +newPharmacy + "\"}"; 
-			 
-		} catch (Exception e) {
-			output = "{\"status\":\"error\", \"data\":\"Error while deleting the pharmacy.\"}"; 
+
+			String newItems = readPharmacy();
+			output = "{\"status\":\"success\", \"data\": \"" + newItems + "\"}";
+
+		}
+
+		catch (Exception e) {
+			output = "{\"status\":\"error\", \"data\":\"Error while deleting the Pharmacy .\"}";
 			System.err.println(e.getMessage());
 		}
+
 		return output;
 	}
+	
 }

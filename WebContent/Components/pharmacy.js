@@ -8,7 +8,7 @@ $(document).ready(function(){
 });
 
 // SAVE ============================================
-$(document).on("click", "#btnSave", function(event) {
+  $(document).on("click", "#btnSave", function(event){
 	// Clear alerts---------------------
 	$("#alertSuccess").text("");
 	$("#alertSuccess").hide();
@@ -34,14 +34,14 @@ $(document).on("click", "#btnSave", function(event) {
 			 dataType : "text",
 			 complete : function(response, status)
 			 {
-			 onItemSaveComplete(response.responseText, status);
+			 onPharmacySaveCmplete(response.responseText, status);
 			 }
 			});
 });
 
-//onItemSave function===========================
+//onPharmacySaveCmplete function===========================
 
-function onItemSaveComplete(response, status) {
+function onPharmacySaveCmplete(response, status) {
 	if (status == "success") {
 		var resultSet = JSON.parse(response);
 		if (resultSet.status.trim() == "success")
@@ -70,7 +70,7 @@ function onItemSaveComplete(response, status) {
 
 
 // UPDATE==========================================
-$(document).on("click",".btnUpdate",function(event) 
+$(document).on("click", ".btnUpdate", function(event)
 		{
 			$("#hidRegIdSave").val($(this).closest("tr").find('#hidRegIdUpdate').val());
 			$("#phName").val($(this).closest("tr").find('td:eq(0)').text());
@@ -84,21 +84,22 @@ $(document).on("click",".btnUpdate",function(event)
 //REMOVE==============================================
 
 $(document).on("click", ".btnRemove", function(event) {
+	
 	$.ajax({
 		url : "PharmacyAPI",
 		type : "DELETE",
 		data : "RegId=" + $(this).data("RegId"),
 		dataType : "text",
 		complete : function(response, status) {
-			onItemDeleteComplete(response.responseText, status);
+			onPharmacyDeleteCmplete(response.responseText, status);
 		}
 	});
 });
 
 
-//onItemDelete function================================
+//onPharmacyDeleteCmplete function================================
 
-function onItemDeleteComplete(response, status) {
+function onPharmacyDeleteCmplete(response, status) {
 	if (status == "success") {
 		var resultSet = JSON.parse(response);
 		if (resultSet.status.trim() == "success") {

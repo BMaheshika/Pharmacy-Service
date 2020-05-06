@@ -90,8 +90,9 @@ public class Pharmacy {
 				output += "<td>" + email + "</td>";
 				
 				// buttons
-				output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td>"
-				+"<td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' data-itemid='"+RegId+"'>" + "</td></tr>";
+				//put btn ids
+				output += "<td><input id='btnUpdate' name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td>"
+				+"<td><input id='btnRemove' name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' data-itemid='"+RegId+"'>" + "</td></tr>";
 						
 				//<input name=\"hidRegIdDelete\" type=\"hidden\" value=\"" + RegId + "\">" + "</form></td></tr>";
 			}
@@ -126,14 +127,14 @@ public class Pharmacy {
 			preparedStmt.setString(5, regDate);
 			preparedStmt.setString(6, email);
 			
-			preparedStmt.setInt(6, Integer.parseInt(Id));
+			preparedStmt.setInt(7, Integer.parseInt(Id));
 			
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
-			
-			String newPharmacy = readPharmacy();
-			 output = "{\"status\":\"success\", \"data\": \"" +newPharmacy + "\"}"; 
+		
+			String newPhr = readPharmacy();
+			output = "{\"status\":\"success\", \"data\": \"" +newPhr + "\"}"; 
 
 		} catch (Exception e) {
 			output = "{\"status\":\"error\", \"data\":\"Error while updating the pharmacy.\"}"; 

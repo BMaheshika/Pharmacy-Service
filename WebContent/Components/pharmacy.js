@@ -118,10 +118,8 @@ function onItemDeleteComplete(response, status) {
 		$("#alertError").show();
 	}
 }
-
-
 // CLIENTMODEL=========================================================================
-function validateItemForm() {
+function validatePharmacyForm() {
 	// NAME
 	if ($("#phName").val().trim() == "") {
 		return "Insert Pharmacy Name.";

@@ -43,8 +43,7 @@ public class Pharmacy {
 			con.close();
 			
 			String newPharmacy = readPharmacy();
-			 output = "{\"status\":\"success\", \"data\": \"" +
-			 newPharmacy + "\"}"; 
+			 output = "{\"status\":\"success\", \"data\": \"" + newPharmacy + "\"}"; 
 			 
 			 
 		} catch (Exception e) {
@@ -92,7 +91,7 @@ public class Pharmacy {
 				
 				// buttons
 				output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td>"
-				+"<td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger'></td></tr>";
+				+"<td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' data-itemid='"+RegId+"'>" + "</td></tr>";
 						
 				//<input name=\"hidRegIdDelete\" type=\"hidden\" value=\"" + RegId + "\">" + "</form></td></tr>";
 			}
@@ -134,8 +133,7 @@ public class Pharmacy {
 			con.close();
 			
 			String newPharmacy = readPharmacy();
-			 output = "{\"status\":\"success\", \"data\": \"" +
-			 newPharmacy + "\"}"; 
+			 output = "{\"status\":\"success\", \"data\": \"" +newPharmacy + "\"}"; 
 
 		} catch (Exception e) {
 			output = "{\"status\":\"error\", \"data\":\"Error while updating the pharmacy.\"}"; 
@@ -165,8 +163,7 @@ public class Pharmacy {
 			con.close();
 			
 			String newPharmacy = readPharmacy();
-			 output = "{\"status\":\"success\", \"data\": \"" +
-			 newPharmacy + "\"}"; 
+			 output = "{\"status\":\"success\", \"data\": \"" +newPharmacy + "\"}"; 
 			 
 		} catch (Exception e) {
 			output = "{\"status\":\"error\", \"data\":\"Error while deleting the pharmacy.\"}"; 
